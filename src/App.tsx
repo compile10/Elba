@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { IParticlesParams } from "react-particles-js";
 import Particles from "react-particles-js";
@@ -34,6 +34,26 @@ let options: IParticlesParams  = {
 	    }
 	}
 
+function Time() {
+	const [time, setTime] = useState(new Date());
+
+	const tick = () => {
+		setTime(new Date());
+	}
+	
+	useEffect(() => { 
+		var timer = setInterval( () => tick(), 1000 );
+		return function cleanup() {
+			clearInterval(timer);
+		};
+	})
+
+	let regexTime = (time.toLocaleTimeString()).replace(/:\d+ /, ' ');;
+	return (
+		<>{regexTime}</>
+	);
+}
+	  
 
 function App() {
 
@@ -48,7 +68,7 @@ function App() {
       </header>
 	  <div className="grid">
 			<div className="timedate">
-				<h1>The time is 12:34 PM.</h1>
+				<h1>The time is <Time/>.</h1>
 			</div>
 	  </div>
 
