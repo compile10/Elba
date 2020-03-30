@@ -50,7 +50,7 @@ function App() {
 			<div className="timedate">
 				<h1>The time is 12:34 PM.</h1>
 			</div>
-		</div>
+	  </div>
 
     </div>
   );

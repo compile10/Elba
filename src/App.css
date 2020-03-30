@@ -45,9 +45,11 @@ h1{
 
 .grid{
   display: grid;
+  height: 100%;
+  width: 100%;
   grid-template-columns: [first] 35% [line2] auto [line3] 25% [last];
   grid-template-rows: [row1-first] 25% [row1-end] 500px [row2-end] 500px [lastrow];
-
+  position: absolute;
 }
 
 .timedate{
