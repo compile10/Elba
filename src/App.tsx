@@ -55,6 +55,32 @@ function Time() {
 }
 	  
 
+function SearchBar() {
+	const [value, setValue] = useState('');
+
+
+	const enterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.which === 13 /* Enter */) {
+		  event.preventDefault();
+		  window.location.href = `https://www.google.com/search?q=${value}`
+		}
+	  }
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setValue(event.target.value);
+	}
+	
+	return (
+			<form>
+				<div className="searchBorder">
+				<input type="text" className="searchbar" placeholder="Search internet"  onChange={handleChange } onKeyPress={enterKey} />
+				</div>
+			</form>
+	
+	);
+}
+	  
+
+
 function App() {
 
   return (
@@ -68,8 +94,10 @@ function App() {
       </header>
 	  <div className="grid">
 			<div className="timedate">
-				<h1>The time is <Time/>.</h1>
+				<h1 id="time">The time is <Time/>.</h1>
+				<SearchBar/>
 			</div>
+			
 	  </div>
 
     </div>

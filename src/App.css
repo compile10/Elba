@@ -59,3 +59,25 @@ h1{
   grid-row-start: row1-end;
   grid-row-end: row2-end;
 }
+
+.searchbar{
+  width: 400px;
+  height: 25px;
+  outline: none; 
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex: 100%;
+}
+
+.searchBorder{
+  width: 500px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#time{
+  margin-bottom: 35px;
+}
