@@ -3,6 +3,11 @@ import './App.css';
 import { IParticlesParams } from "react-particles-js";
 import Particles from "react-particles-js";
 
+interface SearchResult {
+	website: string;
+	searchValue: string;
+};
+
 let options: IParticlesParams  = {
 	    particles: {
 	        number: {
@@ -56,13 +61,61 @@ function Time() {
 	  
 
 function SearchBar() {
+
 	const [value, setValue] = useState('');
 
+	const searchWebsites = (searchTerms: Array<SearchResult>): void => {
+		while(searchTerms.length !== 0) {
+			let searchTerm: SearchResult = searchTerms.pop()!;
+			console.log(searchTerm);
+			switch(searchTerm.website){
+				case "dcc":
+					window.open(`https://duckduckgo.com/?q=${searchTerm.searchValue}`);
+					break;
+				case "g":
+					window.open(`https://www.google.com/search?q=${searchTerm.searchValue}`);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const checkFlags = (enteredValue: string): Array<SearchResult> => {
+		let commands: Array<string> = enteredValue.split(" && ");
+		let searchesToExecute: Array<SearchResult> = [];
+		while(commands.length !== 0) {
+			let regexFlags = /-(\w+)\s([\w|\d|\s]*)/g;
+			let commandString = commands.pop();
+			let foundFlags = regexFlags.exec(commandString as string);
+			if(foundFlags == null || foundFlags.length <= 2){
+				continue;
+			}
+			let flagSite: string = foundFlags![1];
+			switch(flagSite){
+				case "dcc":
+					console.log("dsasdasda 12132231");
+					searchesToExecute.push({website: flagSite, 
+						                    searchValue: foundFlags![2]});
+					break;
+				case "g":
+					searchesToExecute.push({website: flagSite, 
+						                    searchValue: foundFlags![2]});
+					break;
+				default:
+					break;
+			}
+		}
+		return searchesToExecute;
+        
+	}
 
 	const enterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.which === 13 /* Enter */) {
 		  event.preventDefault();
-		  window.location.href = `https://www.google.com/search?q=${value}`
+		  let termsToSearch: Array<SearchResult> = checkFlags(value);
+		  searchWebsites(termsToSearch);
+		  setValue("");
 		}
 	  }
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
