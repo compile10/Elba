@@ -61,22 +61,17 @@ h1{
 }
 
 .searchbar{
-  width: 300px;
-  height: 25px;
-  outline: none; 
-  border: none;
-  margin: auto;
-  padding: 0;
-  display: flex;
-  flex: 100%;
+  width: 90%;
+  border: 1px solid #00B4CC;
+  padding: 3px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none;
 }
 
 .searchBorder{
-  
   width: 500px;
   margin: auto;
-  display: flex;
-  justify-content: center;
 }
 
 #time{
